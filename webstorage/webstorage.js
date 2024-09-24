@@ -27,8 +27,64 @@
 // il metodo clear() svuota il localStorage
 // localStorage.clear()
 
+const myName = 'Giacomo'
+
 // il metodo setItem() inserisce una chiave nel localStorage
+localStorage.setItem('name', myName)
 localStorage.setItem('benchmarkResult', 75)
+localStorage.setItem('value', true)
 
 const value = localStorage.getItem('benchmarkResult')
 console.log(value) // 75
+
+// LOCALSTORAGE E SESSIONSTORAGE SALVANO SEMPRE I VALORI COME STRINGA!!
+
+const stringArray = ['uno', 'due', 'tre']
+localStorage.setItem('array', stringArray)
+
+const obj = { name: 'Stefano', age: 19 }
+localStorage.setItem('object', obj)
+
+// JSON.stringify() e JSON.parse()
+// JSON.stringify() trasforma un array o un oggetto in una stringa in modo corretto
+// JSON.parse() riconverte una stringa nell'array/oggetto originale
+
+// ri-salviamo i dati complessi di prima nel modo corretto
+localStorage.setItem('correctArray', JSON.stringify(stringArray))
+localStorage.setItem('correctObject', JSON.stringify(obj))
+// questi valori sono stati correttamente trasformati in stringa e salvati nel localStorage
+
+// proviamo a recuperare l'oggetto...
+const retrievedObject = localStorage.getItem('correctObject')
+console.log('oggetto stringhifizzato', retrievedObject)
+
+const objectAgain = JSON.parse(retrievedObject)
+console.log('ri-convertito in oggetto vero e proprio', objectAgain)
+
+const retrievedArray = localStorage.getItem('correctArray')
+console.log('array stringhifizzato', retrievedArray)
+
+const arrayAgain = JSON.parse(retrievedArray)
+console.log('ri-convertito in array vero e proprio', arrayAgain)
+
+// dobbiamo usare JSON.stringify() e JSON.parse() con quei tipi di dato complesso
+// che JS non è in grado autonomamente di convertire (decentemente) in stringa:
+// ARRAY e OGGETTI
+
+const album = {
+  title: 'The Dark Side of the Moon',
+  artist: 'Pink Floyd',
+  year: 1973,
+  genre: ['rock', 'progressive rock'],
+  totalTracks: 10,
+  duration: 42.57,
+}
+
+localStorage.setItem('albumBrutto', album) // NON FUNZIONA
+// modo corretto
+localStorage.setItem('albumCorretto', JSON.stringify(album))
+// recupero la stringa
+const albumAsAString = localStorage.getItem('albumCorretto')
+// però è solo una stringa! per ri-ottenere album dobbiamo ri-convertirla in oggetto
+const newAlbum = JSON.parse(albumAsAString)
+console.log('ALBUM PASSATO IN LOCALSTORAGE E RECUPERATO', newAlbum)
