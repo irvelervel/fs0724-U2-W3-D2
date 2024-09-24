@@ -1,0 +1,15 @@
+{
+    "firstName": "Mario",
+    "lastName": "Bros",
+    "age": 39,
+    "games": [
+        "Mario Bros",
+        "Super Mario Bros",
+        "tantissimi"
+    ],
+    "address": {
+        "street": "Mushroom Road",
+        "zipCode": 35234,
+        "civicNumber": 35
+    }
+}
